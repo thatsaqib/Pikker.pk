@@ -80,7 +80,7 @@ app.get("/", async (req, res) => {
 
 
 // Legal Pages
-app.get('/terms', (req, res) => res.render('Legal/Terms'));
+app.get('/terms', (req, res) => res.render('Legal/terms'));
 app.get('/privacy', (req, res) => res.render('Legal/Privacy'));
 app.get('/cnic-policy', (req, res) => res.render('Legal/CNIC Handling'));
 
