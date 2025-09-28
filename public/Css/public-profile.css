@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.header {
+    background: #00754a;
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logo span {
+    color: #ffce00;
+}
+
+.profile-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.profile-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #00754a;
+}
+
+.verified-badge {
+    color: #00754a;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.msg-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #00754a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.msg-btn:hover {
+    background: #005f3b;
+}
+
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.listing-card {
+    background: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.listing-card img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.reviews {
+    margin-top: 30px;
+}
+
+.review-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.reviews {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.reviews h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.review-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.review-card strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.review-card p {
+    margin: 5px 0 0 0;
+    line-height: 1.5;
+}
+
+.review-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.review-form select,
+.review-form textarea,
+.review-form button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.review-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.review-form button {
+    background-color: #00754a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.review-form button:hover {
+    background-color: #005f3b;
+}

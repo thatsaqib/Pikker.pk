@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pending CNICs</title>
+    <link rel="stylesheet" href="Css/index.css">
+</head>
+
+<body>
+    <h1>Pending CNIC Requests</h1>
+
+    <% if (users.length===0) { %>
+        <p>No pending CNICs 🎉</p>
+        <% } else { %>
+            <table border="1" cellpadding="8">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>CNIC</th>
+                    <th>Action</th>
+                </tr>
+                <% users.forEach(user=> { %>
+                    <tr>
+                        <td>
+                            <%= user.name %>
+                        </td>
+                        <td>
+                            <%= user.email %>
+                        </td>
+                        <td>
+                            <%= user.cnic.number %>
+                        </td>
+                        <td>
+                            <a href="/admin/cnics/<%= user._id %>?status=approved">✅ Approve</a> |
+                            <a href="/admin/cnics/<%= user._id %>?status=rejected">❌ Reject</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+            <% } %>
+</body>
+
+</html>

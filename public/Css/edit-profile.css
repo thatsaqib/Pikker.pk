@@ -1,0 +1,252 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+.header {
+    background: #00754a;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ffce00;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.current-pic {
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.save-btn {
+    background: #00754a;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cnic-section {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #f9f9f9;
+}
+
+.cnic-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.cnic-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    color: #444;
+}
+
+.cnic-form input[type="file"] {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    width: 100%;
+}
+
+.cnic-form button {
+    display: inline-block;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cnic-form button:hover {
+    background: #00532e;
+}
+
+.cnic-status-box {
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.cnic-status {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.cnic-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.cnic-status.verified {
+    background: #d4edda;
+    color: #155724;
+}
+
+.cnic-status.rejected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.cnic-preview {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.cnic-preview img {
+    width: 160px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.verified-badge {
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cnic-status.pending {
+    color: orange;
+}
+
+.cnic-status.rejected {
+    color: red;
+}
+
+.verified-badge {
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cnic-status.pending {
+    color: orange;
+}
+
+.cnic-status.rejected {
+    color: red;
+}
+
+.my-listings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.listing-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 220px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.listing-thumb {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.listing-info h3 {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #00754a;
+}
+
+.delete-btn {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #cc0000;
+}
+
+
+@media (max-width: 500px) {
+    .edit-form {
+        width: 90%;
+        padding: 20px;
+    }
+}

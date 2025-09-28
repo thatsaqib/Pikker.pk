@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= user.name %> | Pickker.pk
+    </title>
+    <link rel="stylesheet" href="/Css/public-profile.css">
+    <link rel="shortcut icon" href="/Imgs/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='/'">Pickker<span>.pk</span></div>
+    </header>
+
+    <main class="profile-container">
+        <div class="profile-info">
+            <img src="<%= user.profilePic %>" alt="Profile" class="profile-pic">
+            <h2>
+                <%= user.name %>
+                    <% if (user.cnic && user.cnic.status==="Verified" ) { %>
+                        <span class="verified-badge">✔</span>
+                        <% } %>
+            </h2>
+            <p>Joined: <%= user.joinedAt.toDateString() %>
+            </p>
+        </div>
+
+        <section class="listings">
+            <h3>Listings</h3>
+            <div class="listing-grid">
+                <% listings.forEach(listing=> { %>
+                    <div class="listing-card">
+                        <img src="<%= listing.image %>" alt="Listing">
+                        <h4>
+                            <%= listing.title %>
+                        </h4>
+                        <p>PKR <%= listing.price %>
+                        </p>
+                    </div>
+                    <% }) %>
+            </div>
+        </section>
+
+        <section class="reviews">
+    <h3>Reviews</h3>
+
+    <% if (reviews.length === 0) { %>
+        <p>No reviews yet.</p>
+    <% } else { %>
+        <% reviews.forEach(review => { %>
+            <div class="review-card">
+                <strong><%= review.from.name %></strong> ⭐ <%= review.rating %>/5
+                <p><%= review.comment %></p>
+            </div>
+        <% }) %>
+    <% } %>
+
+    <!-- Review Form (Agar user khud ko review na kare aur ek hi baar review kare) -->
+    <% if (currentUser && currentUser._id.toString() !== user._id.toString() && !hasReviewed) { %>
+        <form action="/user/<%= user._id %>/review" method="POST" class="review-form">
+            <label for="rating">Rating:</label>
+            <select name="rating" required>
+                <option value="5">5 ⭐</option>
+                <option value="4">4 ⭐</option>
+                <option value="3">3 ⭐</option>
+                <option value="2">2 ⭐</option>
+                <option value="1">1 ⭐</option>
+            </select>
+
+            <textarea name="comment" placeholder="Write your review..." required></textarea>
+            <button type="submit">Submit Review</button>
+        </form>
+    <% } %>
+</section>
+
+    </main>
+</body>
+
+</html>

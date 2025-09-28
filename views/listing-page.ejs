@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= listing.title %> - Pickker.pk
+    </title>
+    <link rel="stylesheet" href="/Css/listing-page.css">
+    <link rel="stylesheet" href="/Css/index.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Pickker<span>.pk</span></div>
+        <form action="/search" method="GET" class="search-bar">
+            <input type="text" name="q" placeholder="Search for listings or users..." required>
+            <button type="submit">Search</button>
+        </form>
+        <div class="actions">
+            <% if (currentUser) { %>
+                <div class="user-info">
+                    <button class="post-ad-btn" onclick="window.location.href='/listing/add'">+ Post Ad</button>
+                    <a href="/logout" class="logout-btn cta-btn">Logout</a>
+                </div>
+                <% } else { %>
+                    <button class="login-btn" onclick="window.location.href='/login'">Login</button>
+                    <% } %>
+        </div>
+    </header>
+
+    <!-- Main Listing Section -->
+    <main class="listing-container">
+        <div class="listing-left">
+            <!-- Image Gallery -->
+            <div class="image-gallery">
+                <% listing.images.forEach(img=> { %>
+                    <img src="<%= img %>" alt="<%= listing.title %>">
+                    <% }) %>
+            </div>
+
+            <!-- Description -->
+            <section class="listing-description">
+                <h2>Description</h2>
+                <p>
+                    <%= listing.description %>
+                </p>
+            </section>
+
+            <!-- Reviews -->
+            <section class="listing-reviews">
+                <h2>Reviews</h2>
+                <% if (reviews.length===0) { %>
+                    <p>No reviews yet.</p>
+                    <% } else { %>
+                        <% reviews.forEach(review=> { %>
+                            <div class="review-card">
+                                <strong>
+                                    <%= review.from.name %>
+                                </strong> ⭐ <%= review.rating %>/5
+                                    <p>
+                                        <%= review.comment %>
+                                    </p>
+                            </div>
+                            <% }) %>
+                                <% } %>
+            </section>
+            <section class="add-review">
+                <% if (currentUser && currentUser._id.toString() !==listing.createdBy._id.toString() && !hasReviewed) {
+                    %>
+                    <h3>Leave a Review for <%= listing.createdBy.name %>
+                    </h3>
+                    <form action="/user/<%= listing.createdBy._id %>/review" method="POST">
+                        <label for="rating">Rating:</label>
+                        <select name="rating" required>
+                            <option value="5">5 ⭐</option>
+                            <option value="4">4 ⭐</option>
+                            <option value="3">3 ⭐</option>
+                            <option value="2">2 ⭐</option>
+                            <option value="1">1 ⭐</option>
+                        </select>
+
+                        <textarea name="comment" placeholder="Write your review..." required></textarea>
+                        <button type="submit">Submit Review</button>
+                    </form>
+                    <% } %>
+            </section>
+
+        </div>
+
+        <div class="listing-right">
+            <h1>
+                <%= listing.title %>
+            </h1>
+            <p class="price">PKR <%= listing.price %>
+            </p>
+            <span class="category">
+                <%= listing.category %> | <%= listing.condition %>
+            </span>
+            <p class="location">Location: <%= listing.location %>
+            </p>
+
+            <section class="seller-info">
+                <h3>Seller</h3>
+                <div class="seller-dtl" style="display: flex; align-items: center; gap: 10px;">
+                    <img src="<%= listing.createdBy.profilePic %>" alt="profile picture" class="avatar" width="50"
+                        height="50" style="border: 2px solid; border-radius: 50%; cursor: pointer;"
+                        onclick="window.location.href='/user/<%= listing.createdBy._id %>'">
+                    <p><a href="/user/<%= listing.createdBy._id %>" style="color: black;  font-weight: bold;">
+                            <%= listing.createdBy.name %>
+                        </a></p>
+                </div>
+                <% if (currentUser) { %>
+                    <button class="contact-btn"
+                        onclick="window.location.href='/chat/<%= listing.createdBy._id %>/<%= listing._id %>'">
+                        Contact Seller
+                    </button>
+
+                    <% } else { %>
+                        <a href="/auth/google">Login to Contact Seller</a>
+                        <% } %>
+
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Pickker.pk - Made in Pakistan</p>
+    </footer>
+</body>
+
+</html>

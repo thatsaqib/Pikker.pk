@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Listing - Pickker.pk</title>
+    <link rel="stylesheet" href="/Css/add-listing.css">
+    <link rel="shortcut icon" href="/Imgs/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Add a New Listing</h1>
+        <p>Welcome, <%= user.name %>
+        </p>
+    </header>
+
+    <main>
+        <form action="/listing/add" method="POST" enctype="multipart/form-data">
+            <input type="text" name="title" placeholder="Title" required>
+            <textarea name="description" placeholder="Description" required></textarea>
+            <input type="number" name="price" placeholder="Price" required>
+            <input type="text" name="location" placeholder="Location" required>
+
+            <!-- Category -->
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option value="Mobiles">Mobiles</option>
+                <option value="Cars">Cars</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="Books">Books</option>
+            </select>
+
+            <!-- Condition -->
+            <select name="condition" required>
+                <option value="">Select Condition</option>
+                <option value="New">New</option>
+                <option value="Used">Used</option>
+            </select>
+
+            <!-- Images -->
+            <label>Upload Images (max 3)</label>
+            <input type="file" name="images" accept="image/*" multiple required onchange="previewImages(event)">
+
+            <!-- Image Preview -->
+            <div id="imagePreview" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
+
+            <button type="submit">Add Listing</button>
+        </form>
+    </main>
+
+    <script>
+        function previewImages(event) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            const files = event.target.files;
+            if (files.length > 3) {
+                alert("You can upload maximum 3 images");
+                event.target.value = '';
+                return;
+            }
+            Array.from(files).forEach(file => {
+                const img = document.createElement("img");
+                img.src = URL.createObjectURL(file);
+                img.style.width = "100px";
+                img.style.height = "100px";
+                img.style.objectFit = "cover";
+                preview.appendChild(img);
+            });
+        }
+    </script>
+</body>
+
+</html>

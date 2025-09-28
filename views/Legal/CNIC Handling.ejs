@@ -1,0 +1,161 @@
+<!-- cnic-policy.html -->
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CNIC Data Policy — Pickker.pk</title>
+    <link rel="shortcut icon" href="/Imgs/logo.png" type="image/x-icon">
+    <style>
+        :root {
+            --green: #0a7a3f;
+            --dark: #083d25;
+            --muted: #6b7280;
+            --max: 900px
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Nastaliq Urdu', sans-serif;
+            margin: 0;
+            background: #f7faf7;
+            color: #0f1724
+        }
+
+        .container {
+            max-width: var(--max);
+            margin: 32px auto;
+            padding: 24px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06)
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 54px;
+            height: 54px;
+            border-radius: 40px;
+            background-image: url('logo.png');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700
+        }
+
+        h1 {
+            margin: 8px 0 12px;
+            font-size: 20px
+        }
+
+        p {
+            color: var(--muted);
+            line-height: 1.6
+        }
+
+        h2 {
+            color: var(--dark);
+            margin-top: 20px
+        }
+
+        .note {
+            background: #f0fff6;
+            border-left: 4px solid var(--green);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0
+        }
+
+        footer {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid #eef2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        a.btn {
+            background: var(--green);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        @media (max-width:600px) {
+            .container {
+                margin: 12px;
+                padding: 16px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"></div>
+            <div>
+                <strong>Pickker.pk</strong>
+                <div class="muted">Pakistan ka apna marketplace</div>
+            </div>
+        </header>
+
+        <h1>CNIC Data Policy</h1>
+        <p><strong>Date: </strong>30/9/2025</p>
+
+        <div class="note">
+            <strong>Short summary:</strong> We collect CNIC images only to verify seller identity and reduce fraud. CNIC
+            files are stored securely and retained for a limited time.
+        </div>
+
+        <h2>1. What we collect</h2>
+        <p>We collect CNIC front/back images, and optional selfie or short verification video when uploaded by a user
+            for identity verification.</p>
+
+        <h2>2. Purpose</h2>
+        <p>To verify seller identity, reduce fraudulent listings, and improve safety of the marketplace. Verified users
+            receive a CNIC Verified badge.</p>
+
+        <h2>3. Storage &amp; Access</h2>
+        <ul>
+            <li>CNIC files are stored encrypted in our secure storage (S3 or equivalent).</li>
+            <li>Only verification admins can access these files via a signed URL and every access is logged.</li>
+        </ul>
+
+        <h2>4. Retention</h2>
+        <p>CNIC files are retained for <strong>90 days</strong> after verification and are then permanently deleted. We
+            retain a masked CNIC (e.g., 42101-*****-1) and the verification record for audit.</p>
+
+        <h2>5. User rights</h2>
+        <p>Users may request deletion of their CNIC files at any time by contacting verification@Pickker.pk. Deleting
+            CNIC data will remove verification status.</p>
+
+        <h2>6. Sharing</h2>
+        <p>We do not share CNIC files with third parties except when required by law or official requests from
+            authorities.</p>
+
+        <footer>
+            <div class="muted">For CNIC data requests: verification@Pickker.pk</div>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results for "<%= query %>"</title>
+    <link rel="stylesheet" href="/Css/index.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #00754a;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #00754a;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        a {
+            text-decoration: none;
+            color: #00754a;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .no-results {
+            font-style: italic;
+            color: #555;
+            padding: 10px 0;
+        }
+
+        .header {
+            background: #00754a;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffce00;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Pickker<span>.pk</span></div>
+        <form action="/search" method="GET" class="search-bar">
+            <input type="text" name="q" placeholder="Search for listings or users..." required>
+            <button type="submit">Search</button>
+        </form>
+    </header>
+    <div class="container">
+        <h2>Search results for "<%= query %>"</h2>
+
+        <h3>Listings</h3>
+        <% if (listings.length===0) { %>
+            <p class="no-results">No listings found.</p>
+            <% } else { %>
+                <ul>
+                    <% listings.forEach(listing=> { %>
+                        <li>
+                            <a href="/listing/<%= listing._id %>">
+                                <%= listing.title %>
+                            </a>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+                    <h3>Users</h3>
+                    <% if (users.length===0) { %>
+                        <p class="no-results">No users found.</p>
+                        <% } else { %>
+                            <ul>
+                                <% users.forEach(user=> { %>
+                                    <li style="display: flex; align-items: center; gap: 10px;">
+                                        <a href="/user/<%= user._id %>">
+                                            <img src="<%= user.profilePic %>" alt="" width="40">
+                                        </a>
+                                        <a href="/user/<%= user._id %>">
+                                            <%= user.name %>
+                                        </a>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                            <% } %>
+    </div>
+</body>
+
+</html>

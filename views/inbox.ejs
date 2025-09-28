@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox - Pickker.pk</title>
+    <link rel="stylesheet" href="/Css/chat.css">
+    <link rel="stylesheet" href="/Css/index.css">
+    <link rel="shortcut icon" href="/Imgs/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Pickker<span>.pk</span></div>
+        <div class="actions">
+            <% if (currentUser) { %>
+                <div class="user-info">
+                    <img src="<%= currentUser.profilePic %>" class="avatar" onclick="window.location.href='/profile'">
+                    <a href="/logout" class="logout-btn">Logout</a>
+                </div>
+                <% } else { %>
+                    <button onclick="window.location.href='/login'" class="login-btn">Login</button>
+                    <% } %>
+        </div>
+    </header>
+    <main class="inbox-container">
+        <h2>Inbox</h2>
+        <% if(threads.length===0){ %>
+            <p>No conversations yet.</p>
+            <% } else { %>
+                <div class="threads">
+                    <% threads.forEach(thread=> {
+                        const otherUser = thread.participants.find(p => p._id.toString() !==
+                        currentUser._id.toString());
+                        %>
+
+                        <% if(otherUser){ %>
+                            <div class="thread-card">
+                                <img src="<%= otherUser.profilePic || '/Imgs/default-avatar.png' %>" alt="profile"
+                                    class="avatar">
+                                <div class="thread-info">
+                                    <a href="/chat/<%= otherUser._id %>/<%= thread.listing ? thread.listing._id : '' %>"
+                                        class="thread-user">
+                                        <%= otherUser.name %>
+                                            <% if(thread.listing){ %> - <%= thread.listing.title %>
+                                                    <% } %>
+                                    </a>
+                                    <p class="last-msg">
+                                        <%= thread.lastMessageText || '' %>
+                                    </p>
+                                </div>
+                                <span class="time">
+                                    <%= thread.lastMessageAt ? new Date(thread.lastMessageAt).toLocaleString() : '' %>
+                                </span>
+                                <% if(thread.unreadCount> 0){ %>
+                                    <span class="unread-badge">
+                                        <%= thread.unreadCount %>
+                                    </span>
+                                    <% } %>
+                            </div>
+                            <% } %>
+
+                                <% }) %>
+                </div>
+                <% } %>
+    </main>
+
+</body>
+
+</html>

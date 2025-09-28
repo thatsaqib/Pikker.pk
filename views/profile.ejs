@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= user.name %> - Profile | Pickker.pk
+    </title>
+    <link rel="stylesheet" href="Css/profile.css">
+    <link rel="shortcut icon" href="Imgs/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Pickker<span>.pk</span></div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <div class="profile-card">
+            <div class="profile-pic-container">
+                <img src="<%= user.profilePic %>" alt="<%= user.name %>" class="profile-pic">
+
+                <% if (user.cnic.status==="approved" ) { %>
+                    <span class="verified-badge"><img src="Imgs/verified-badge.png" alt="" width="30"></span>
+                    <% } %>
+            </div>
+
+            <h1>
+                <%= user.name %>
+            </h1>
+            <p>
+                <%= user.email %>
+            </p>
+            <p>Joined: <%= user.joinedAt.toDateString() %>
+            </p>
+
+            <div class="cnic-status <%= user.cnic.status.toLowerCase() %>">
+                CNIC Status: <%= user.cnic.status %>
+            </div>
+
+
+            <button class="edit-btn" onclick="window.location.href='/profile/edit'">Edit Profile</button>
+
+        </div>
+    </main>
+</body>
+
+</html>

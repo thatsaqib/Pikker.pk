@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with <%= otherUser.name %> - Pickker.pk</title>
+    <link rel="stylesheet" href="/Css/chat.css">
+    <link rel="stylesheet" href="/Css/index.css">
+    <link rel="shortcut icon" href="/Imgs/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Pickker<span>.pk</span></div>
+        <div class="actions" style="display: flex; align-items: center; gap: 10px;">
+            <% if(currentUser){ %>
+                <img src="<%= currentUser.profilePic %>" class="avatar" onclick="window.location.href='/profile'">
+                <a href="/logout" class="logout-btn" style="color: black;">Logout</a>
+                <% } else { %>
+                    <button onclick="window.location.href='/login'" class="login-btn">Login</button>
+                    <% } %>
+        </div>
+    </header>
+
+    <main class="chat-container">
+        <h2>Chat with <%= otherUser.name %>
+        </h2>
+
+        <div class="chat-window" id="chat-window">
+            <% if (messages && messages.length) { %>
+                <% messages.forEach(msg=> { %>
+                    <div
+                        class="chat-message <%= msg.sender._id.toString() === currentUser._id.toString() ? 'sent' : 'received' %>">
+                        <p>
+                            <%= msg.content || msg.text %>
+                        </p>
+                        <span class="time">
+                            <%= new Date(msg.createdAt).toLocaleTimeString() %>
+                        </span>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <p>No messages yet</p>
+                            <% } %>
+        </div>
+
+        <form id="chatForm">
+            <input type="text" id="msgInput" placeholder="Type a message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </main>
+
+    <div class="typing-indicator" id="typingIndicator" style="display:none;">Typing...</div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        const threadId = "<%= thread._id %>";
+        const currentUserId = "<%= currentUser._id %>";
+        const otherUserId = "<%= otherUser._id %>";
+
+        // Join the thread room
+        socket.emit("joinThread", threadId);
+
+        const chatWindow = document.getElementById("chat-window");
+        const msgInput = document.getElementById("msgInput");
+        const chatForm = document.getElementById("chatForm");
+        const typingIndicator = document.getElementById('typingIndicator');
+        let typingTimeout;
+
+        // Send message
+        chatForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const text = msgInput.value.trim();
+            if (!text) return;
+
+            socket.emit("sendMessage", { threadId, senderId: currentUserId, content: text });
+            msgInput.value = "";
+        });
+
+        // Receive message
+        socket.on("newMessage", msg => {
+            // Ye ab kaam karega kyunki backend threadId bhej raha hai
+            if (msg.threadId !== threadId) return;
+
+            const div = document.createElement("div");
+            div.className = msg.sender.toString() === currentUserId ? 'chat-message sent' : 'chat-message received';
+            div.innerHTML = `<p>${msg.content}</p><span class="time">${new Date(msg.createdAt).toLocaleTimeString()}</span>`;
+            chatWindow.appendChild(div);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        });
+
+        // Typing indicator
+        msgInput.addEventListener('input', () => {
+            socket.emit('typing', { threadId, senderId: currentUserId, isTyping: true });
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => {
+                socket.emit('typing', { threadId, senderId: currentUserId, isTyping: false });
+            }, 1000);
+        });
+
+        socket.on('typing', data => {
+            if (data.threadId !== threadId) return;
+            typingIndicator.style.display = data.isTyping ? 'block' : 'none';
+        });
+    </script>
+</body>
+
+</html>

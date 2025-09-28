@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= categoryName %> Listings - Pickker.pk
+    </title>
+    <link rel="stylesheet" href="/Css/cat-listings.css">
+    <link rel="stylesheet" href="/Css/index.css">
+    <link rel="shortcut icon" href="/Imgs/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo" onclick="window.location.href='/'" style="cursor: pointer;">Pickker<span>.pk</span></div>
+        <a href="/" class="back-home">← Back to Home</a>
+    </header>
+    <!-- End Header -->
+    <!-- Category Title -->
+    <section class="category-header">
+        <h1>
+            <%= categoryName %> Listings
+        </h1>
+        <p>Browse all <%= categoryName %> ads in Pakistan</p>
+    </section>
+
+    <!-- Listings Grid -->
+    <main>
+        <div class="ad-grid">
+            <% if (!listings || listings.length===0) { %>
+                <p style="grid-column: 1 / -1; text-align:center;">No listings available in <%= categoryName %>.</p>
+                <% } else { %>
+                    <% listings.forEach(listing=> { %>
+                        <div class="ad-card" onclick="window.location.href='/listing/<%= listing._id %>'"
+                            style="cursor: pointer;">
+                            <div class="image-slider">
+                                <% listing.images.forEach(img=> { %>
+                                    <img src="<%= img %>" alt="<%= listing.title %>">
+                                    <% }) %>
+                            </div>
+
+                            <h3>
+                                <%= listing.title %>
+                            </h3>
+                            <p class="price">PKR <%= listing.price %>
+                            </p>
+                            <span class="category">
+                                <%= listing.category %> | <%= listing.condition %>
+                            </span>
+                            <p class="location">
+                                <%= listing.location %>
+                            </p>
+                            <p class="seller">by <a href="/user/<%= listing.createdBy._id %>">
+                                    <%= listing.createdBy.name %>
+                                </a></p>
+                        </div>
+                        <% }) %>
+                            <% } %>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Pickker.pk - Made in Pakistan</p>
+    </footer>
+</body>
+
+</html>
